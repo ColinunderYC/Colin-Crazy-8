@@ -261,12 +261,46 @@ export default function App() {
   const topDiscard = game.discardPile[game.discardPile.length - 1];
 
   return (
-    <div className="min-h-screen bg-emerald-900 text-white font-sans selection:bg-emerald-500/30 overflow-hidden flex flex-col relative">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ 
-        backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-        backgroundSize: '40px 40px' 
-      }}></div>
+    <div className="min-h-screen bg-emerald-950 text-white font-sans selection:bg-emerald-500/30 overflow-hidden flex flex-col relative">
+      {/* Immersive Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Layered Gradients */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.15),transparent_70%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(5,150,105,0.1),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_100%,rgba(6,78,59,0.2),transparent_50%)]"></div>
+        
+        {/* Animated Floating Suits */}
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ 
+              x: Math.random() * 100 + "%", 
+              y: Math.random() * 100 + "%", 
+              opacity: 0.03 + Math.random() * 0.07,
+              rotate: Math.random() * 360,
+              scale: 0.5 + Math.random() * 1.5
+            }}
+            animate={{ 
+              y: [null, (Math.random() * 100 - 50) + "%"],
+              rotate: [null, Math.random() * 360],
+            }}
+            transition={{ 
+              duration: 20 + Math.random() * 40, 
+              repeat: Infinity, 
+              ease: "linear" 
+            }}
+            className="absolute text-8xl font-serif select-none"
+          >
+            {SUIT_SYMBOLS[SUITS[i % 4]]}
+          </motion.div>
+        ))}
+
+        {/* Subtle Grid/Pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ 
+          backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
+          backgroundSize: '100px 100px' 
+        }}></div>
+      </div>
       {/* Header */}
       <header className="p-4 flex justify-between items-center bg-black/20 backdrop-blur-md border-b border-white/10">
         <div className="flex items-center gap-2">
