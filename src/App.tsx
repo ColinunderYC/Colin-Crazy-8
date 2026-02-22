@@ -10,6 +10,7 @@ import {
   AlertCircle,
   ChevronRight
 } from 'lucide-react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { CardData, GameState, PlayerType, Suit } from './types';
 import { createDeck, SUIT_COLORS, SUIT_SYMBOLS, SUITS, SUIT_NAMES_CN } from './constants';
 
@@ -521,6 +522,7 @@ export default function App() {
       <footer className="p-4 text-center text-[10px] uppercase tracking-[0.2em] text-white/20 font-bold">
         Standard 52 Card Deck • Wild 8s Rule • AI Opponent v1.0
       </footer>
+      <SpeedInsights />
     </div>
   );
 }
